@@ -15,7 +15,7 @@ export default function App() {
         const doc = parser.parseFromString(text, "text/html");
         const docText = doc.querySelector("body").innerText;
         setFlag(docText);
-        // console.log(typeof flag);
+        console.log(typeof flag);
       })
       .catch((error) => console.log("Failed to fetch data: " + error));
   }),
