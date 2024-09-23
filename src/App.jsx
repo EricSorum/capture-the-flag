@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [flag, setFlag] = useState(null);
+
+  useEffect(() => {
+    fetch(
+      "https://wgg522pwivhvi5gqsn675gth3q0otdja.lambda-url.us-east-1.on.aws/617072"
+    )
+      .then((result) => {
+        return result.text();
+      })
+      .then((text) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+        const docText = doc.querySelector("body").innerText;
+        setFlag(docText);
+        // console.log(typeof flag);
+      })
+      .catch((error) => console.log("Failed to fetch data: " + error));
+  }),
+    [];
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Eric Sorum Captured the Flag:</h1>
+      <ul>
+        {flag.split("").map((letter) => (
+          <li key={letter}>{letter}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-
-export default App
