@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Loading from './Loading';
 
 export default function App() {
   const [flag, setFlag] = useState(null);
@@ -15,13 +16,12 @@ export default function App() {
         const doc = parser.parseFromString(text, "text/html");
         const docText = doc.querySelector("body").innerText;
         setFlag(docText);
-        console.log(typeof flag);
       })
       .catch((error) => console.log("Failed to fetch data: " + error));
   }),
     [];
-
-  return (
+  
+  return typeof(flag)!='string' ? <Loading /> : (
     <div className="App">
       <h1>Eric Sorum Captured the Flag:</h1>
       <ul>
