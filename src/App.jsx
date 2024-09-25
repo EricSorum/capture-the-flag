@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Loading from './Loading';
+import FlagList from './FlagList';
 
 export default function App() {
   const [flag, setFlag] = useState(null);
@@ -15,6 +16,7 @@ export default function App() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
         const docText = doc.querySelector("body").innerText;
+        // flag is getting set to an object?
         setFlag(docText);
       })
       .catch((error) => console.log("Failed to fetch data: " + error));
@@ -24,11 +26,7 @@ export default function App() {
   return typeof(flag)!='string' ? <Loading /> : (
     <div className="App">
       <h1>Eric Sorum Captured the Flag:</h1>
-      <ul>
-        {flag.split("").map((letter) => (
-          <li key={letter}>{letter}</li>
-        ))}
-      </ul>
+      <FlagList flag={flag}/>
     </div>
   );
 }
