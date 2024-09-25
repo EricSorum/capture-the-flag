@@ -17,7 +17,7 @@ export default function FlagList(props) {
       // I need to set a timeout inside the for loop
       // maybe try another way to increment without for loop?
       setTimeout(() => {
-        setFlag(flag + completeFlag.slice(flag.length, flag.length+1))
+        setFlag(completeFlag.slice(0, flag.length+1))
       }, 500);
 
 
