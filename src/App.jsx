@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Loading from './Loading';
-import FlagList from './FlagList';
+import Loading from './components/Loading';
+import FlagList from './components/FlagList';
 
 export default function App() {
   const [flag, setFlag] = useState(null);
@@ -16,7 +16,6 @@ export default function App() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
         const docText = doc.querySelector("body").innerText;
-        // flag is getting set to an object?
         setFlag(docText);
       })
       .catch((error) => console.log("Failed to fetch data: " + error));
